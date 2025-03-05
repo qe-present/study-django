@@ -1,0 +1,26 @@
+[project]
+name = "study-django"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "qe-present", email = "2664481691@qq.com" }
+]
+dependencies = [
+    "django>=5.1.6",
+]
+readme = "README.md"
+requires-python = ">= 3.13"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/study_django"]
