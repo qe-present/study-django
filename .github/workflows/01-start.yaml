@@ -18,9 +18,10 @@ jobs:
             uses: eifinger/setup-rye@v4
             with:
               version: 'latest'
-          - name: 运行Django
-            run: |
+          - name: 安装依赖
+            run:
               rye sync
+          - name: 打包
               cd src/quick_start_01
           - name: 上传文件
             uses: actions/upload-artifact@v4
