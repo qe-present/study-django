@@ -1,0 +1,29 @@
+name: 缓存rye
+on: push
+
+jobs:
+    build:
+        runs-on: windows-latest
+        steps:
+        - name: 读取仓库代码
+          uses: actions/checkout@v4
+
+        - name: 安装rye
+          uses: eifinger/setup-rye@v4
+          with:
+            enable-cache: true
+            version: 'latest'
+
+        - name: 缓存rye
+          uses: actions/cache@v4
+          with:
+            path: ~/.cache/rye
+            key: ${{ runner.os }}-rye-${{ hashFiles('**/pyproject.toml') }}
+            restore-keys: |
+              ${{ runner.os }}-rye-
+            enableCrossOsArchive: true
+            fail-on-cache-miss: false
+            lookup-only: false
+            save-always: false
+          env:
+            RYE_HOME: C:\hostedtoolcache\windows\setup-rye-2024-03-04\0.44.0\x86_64
