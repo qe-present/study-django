@@ -20,6 +20,13 @@ jobs:
         with:
           enable-cache: true
           version: 'latest'
+      - name: 缓存rye
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/rye
+          key: ${{ runner.os }}-rye-${{ hashFiles('**/pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-rye-
 
       - name: 安装依赖
         run: rye sync
