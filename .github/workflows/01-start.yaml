@@ -25,7 +25,7 @@ jobs:
             run: |
               cd src/quick_start_01
 #             查看pyproject.toml文件
-              cat pyproject.toml
+#              cat pyproject.toml
 #
 #              rye run build
            
