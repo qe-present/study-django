@@ -20,9 +20,8 @@ jobs:
               version: 'latest'
           - name: 运行Django
             run: |
-              rye init
               rye sync
-              cd quick_start_01
+              cd src/quick_start_01
           - name: 上传文件
             uses: actions/upload-artifact@v4
             with:
