@@ -14,11 +14,6 @@ jobs:
         steps:
           - name: 读取仓库代码
             uses: actions/checkout@v4
-          - name: 设置Python版本
-            uses: actions/setup-python@v4
-            with:
-              python-version: '3.12.0'
-
           - name: 安装依赖
             uses: eifinger/setup-rye@v4
             with:
