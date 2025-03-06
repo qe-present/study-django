@@ -24,7 +24,7 @@ jobs:
           - name: 打包
             run: |
               cd src/quick_start_01
-              rye build
+              rye run build
           
             
           - name: 上传文件
