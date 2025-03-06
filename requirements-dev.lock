@@ -10,10 +10,26 @@
 #   universal: false
 
 -e file:.
+altgraph==0.17.4
+    # via pyinstaller
 asgiref==3.8.1
     # via django
 django==5.1.6
     # via study-django
+packaging==24.2
+    # via pyinstaller
+    # via pyinstaller-hooks-contrib
+pefile==2023.2.7
+    # via pyinstaller
+pyinstaller==6.12.0
+    # via study-django
+pyinstaller-hooks-contrib==2025.1
+    # via pyinstaller
+pywin32-ctypes==0.2.3
+    # via pyinstaller
+setuptools==75.8.2
+    # via pyinstaller
+    # via pyinstaller-hooks-contrib
 sqlparse==0.5.3
     # via django
 tzdata==2025.1

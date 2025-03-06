@@ -19,13 +19,17 @@ jobs:
             with:
               enable-cache: true
               version: 'latest'
+
           - name: 安装依赖
             run:
               rye sync
+
           - name: 打包
             run: |
               cat pyproject.toml
               cd src/quick_start_01
+              pwd
+              ls
               rye run build 
             
               
