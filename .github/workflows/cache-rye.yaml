@@ -1,5 +1,12 @@
 name: 缓存rye
-on: push
+on:
+  workflow_dispatch:
+    inputs:
+        name:
+            description: 运行
+            required: true
+            default: true
+            type: boolean
 
 jobs:
     build:
@@ -14,16 +21,4 @@ jobs:
             enable-cache: true
             version: 'latest'
 
-        - name: 缓存rye
-          uses: actions/cache@v4
-          with:
-            path: ~/.cache/rye
-            key: ${{ runner.os }}-rye-${{ hashFiles('**/pyproject.toml') }}
-            restore-keys: |
-              ${{ runner.os }}-rye-
-            enableCrossOsArchive: true
-            fail-on-cache-miss: false
-            lookup-only: false
-            save-always: false
-          env:
-            RYE_HOME: C:\hostedtoolcache\windows\setup-rye-2024-03-04\0.44.0\x86_64
+
