@@ -14,16 +14,15 @@ jobs:
         steps:
           - name: 读取仓库代码
             uses: actions/checkout@v4
-#          - name: 安装依赖
-#            uses: eifinger/setup-rye@v4
-#            with:
-#              version: 'latest'
-#          - name: 安装依赖
-#            run:
-#              rye sync
+          - name: 安装依赖
+            uses: eifinger/setup-rye@v4
+            with:
+              version: 'latest'
+          - name: 安装依赖
+            run:
+              rye sync
           - name: 打包
             run: |
-              ls
               cd src/quick_start_01
               rye run build
            
