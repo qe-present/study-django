@@ -9,37 +9,36 @@ on:
         type: boolean
 
 jobs:
-    build:
-        runs-on: windows-latest
-        steps:
-          - name: 读取仓库代码
-            uses: actions/checkout@v4
-          - name: 安装rye
-            uses: eifinger/setup-rye@v4
-            with:
-              enable-cache: true
-              version: 'latest'
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: 读取仓库代码
+        uses: actions/checkout@v4
 
-          - name: 安装依赖
-            run:
-              rye sync
+      - name: 安装rye
+        uses: eifinger/setup-rye@v4
+        with:
+          enable-cache: true
+          version: 'latest'
 
-          - name: 打包
-            run: |
-              cat pyproject.toml
-              cd src/quick_start_01
-              pwd
-              ls
-              rye run build 
-            
-              
+      - name: 缓存rye
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/rye
+          key: ${{ runner.os }}-rye-${{ hashFiles('**/pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-rye-
 
-           
-          
-#
-#          - name: 上传文件
-#            uses: actions/upload-artifact@v4
-#            with:
-#              name: build
-#              path: src/quick_start_01/dist/manage.exe
+      - name: 安装依赖
+        run: rye sync
 
+      - name: 打包
+        run: |
+          cd src/quick_start_01
+          rye run build
+
+      - name: 上传
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: src/quick_start_01/dist/manage.exe
