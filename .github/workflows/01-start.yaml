@@ -24,11 +24,13 @@ jobs:
               rye sync
           - name: 打包
             run: |
-#              cd src/quick_start_01
-#             查看pyproject.toml文件
               cat pyproject.toml
-#
-#              rye run build
+              cd src/quick_start_01
+              rye -v
+              rye run build 
+            
+              
+
            
           
 #
