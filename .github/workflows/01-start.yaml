@@ -22,7 +22,11 @@ jobs:
             run:
               rye sync
           - name: 打包
+            run: |
               cd src/quick_start_01
+              rye build
+          
+            
           - name: 上传文件
             uses: actions/upload-artifact@v4
             with:
