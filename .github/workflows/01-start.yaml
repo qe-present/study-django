@@ -2,7 +2,7 @@ name: "初入Django"
 on:
   workflow_dispatch:
     inputs:
-        name: start
+      name:
         description: 运行
         required: true
         default: true
