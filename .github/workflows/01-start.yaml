@@ -26,7 +26,6 @@ jobs:
             run: |
               cat pyproject.toml
               cd src/quick_start_01
-              rye -v
               rye run build 
             
               
