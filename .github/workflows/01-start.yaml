@@ -1,0 +1,34 @@
+name: "初入Django"
+on:
+  workflow_dispatch:
+    inputs:
+        name: start
+        description: 运行
+        required: true
+        default: true
+        type: boolean
+
+jobs:
+    build:
+        runs-on: windows-latest
+        steps:
+          - name: 读取仓库代码
+            uses: actions/checkout@v4
+          - name: 设置Python版本
+            uses: actions/setup-python@v4
+            with:
+              python-version: '3.12.0'
+          - name: 安装依赖
+            uses: eifinger/setup-rye@v4
+            with:
+              version: 'lastest'
+          - name: 运行Django
+            run: |
+              cd quick_start_01
+              rye run build
+          - name: 上传文件
+            uses: actions/upload-artifact@v4
+            with:
+              name: build
+              path: quick_start_01/dist/manage.exe
+
