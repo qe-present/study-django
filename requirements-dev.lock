@@ -14,7 +14,11 @@ altgraph==0.17.4
     # via pyinstaller
 asgiref==3.8.1
     # via django
+    # via django-cors-headers
 django==5.1.6
+    # via django-cors-headers
+    # via study-django
+django-cors-headers==4.7.0
     # via study-django
 packaging==24.2
     # via pyinstaller

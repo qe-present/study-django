@@ -8,6 +8,7 @@ authors = [
 dependencies = [
     "django>=5.1.6",
     "pyinstaller>=6.12.0",
+    "django-cors-headers>=4.7.0",
 ]
 readme = "README.md"
 requires-python = ">= 3.13"
@@ -15,5 +16,6 @@ requires-python = ">= 3.13"
 [tool.rye.scripts]
 dev = "python manage.py runserver"
 build="pyinstaller -F manage.py"
+build_add_data='pyinstaller -F --add-data="./templates;templates" --add-data="./static;static" manage.py'
 
 

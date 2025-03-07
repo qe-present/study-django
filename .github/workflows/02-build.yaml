@@ -1,4 +1,4 @@
-name: "初入Django"
+name: "结合前端的打包"
 on:
   workflow_dispatch:
     inputs:
@@ -20,24 +20,17 @@ jobs:
         with:
           enable-cache: true
           version: 'latest'
-      - name: 缓存rye
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/rye
-          key: ${{ runner.os }}-rye-${{ hashFiles('**/pyproject.toml') }}
-          restore-keys: |
-            ${{ runner.os }}-rye-
 
       - name: 安装依赖
         run: rye sync
 
       - name: 打包
         run: |
-          cd src/quick_start_01
-          rye run build
+          cd src/show_data_02
+          rye run build_add_data
 
       - name: 上传
         uses: actions/upload-artifact@v4
         with:
           name: dist
-          path: src/quick_start_01/dist/manage.exe
+          path: src/show_data_02/dist/manage.exe
