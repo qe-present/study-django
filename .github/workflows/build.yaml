@@ -50,7 +50,7 @@ jobs:
           cd $target_dir
           pwd
           # 执行打包命令
-#          rye run build_add_data
+          rye run build_add_data
 
       - name: 上传
         uses: actions/upload-artifact@v4
