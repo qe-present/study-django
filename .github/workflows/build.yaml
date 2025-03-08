@@ -1,0 +1,58 @@
+name: 打包
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "运行项目的序号"
+        required: true
+        default: "01"
+        type: string
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: 读取仓库代码
+        uses: actions/checkout@v4
+
+      - name: 安装rye
+        uses: eifinger/setup-rye@v4
+        with:
+          enable-cache: true
+          version: 'latest'
+
+      - name: 安装依赖
+        run: rye sync
+
+      - name: 动态选择目录并进入
+        id: select_dir
+        run: |
+          # 获取输入的序号
+          seq_number=${{ github.event.inputs.name }}
+          # 查找符合条件的目录
+          dirs=$(find src -type d -regex ".*/[a-zA-Z_]+_[0-9]+")
+          echo "Found directories: $dirs"
+          # 选择对应的目录（假设目录名称以序号结尾）
+          target_dir=$(echo "$dirs" | grep "_$seq_number$" | head -n 1)
+          if [ -n "$target_dir" ]; then
+            echo "Target directory: $target_dir"
+            echo "target_dir=$target_dir" >> $GITHUB_OUTPUT
+          else
+            echo "No directory found for sequence number $seq_number. Exiting."
+            exit 1
+          fi
+
+      - name: 打包
+        run: |
+          # 读取上一步选择的目录
+          target_dir=${{ steps.select_dir.outputs.target_dir }}
+          # 进入目标目录
+          cd $target_dir
+          # 执行打包命令
+          rye run build_add_data
+
+      - name: 上传
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: ${{ steps.select_dir.outputs.target_dir }}/dist/manage.exe
