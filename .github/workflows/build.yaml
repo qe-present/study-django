@@ -15,14 +15,14 @@ jobs:
       - name: 读取仓库代码
         uses: actions/checkout@v4
 
-#      - name: 安装rye
-#        uses: eifinger/setup-rye@v4
-#        with:
-#          enable-cache: true
-#          version: 'latest'
-#
-#      - name: 安装依赖
-#        run: rye sync
+      - name: 安装rye
+        uses: eifinger/setup-rye@v4
+        with:
+          enable-cache: true
+          version: 'latest'
+
+      - name: 安装依赖
+        run: rye sync
 
       - name: 动态选择目录并进入
         id: select_dir
